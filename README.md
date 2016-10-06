@@ -1,2 +1,2 @@
 # dubetter
-Scaffolding for web and Node.js projects
+Scaffolding for Web and Node.js projects
