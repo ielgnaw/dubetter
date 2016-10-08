@@ -4,6 +4,8 @@
  */
 
 import _ from 'lodash';
+import chalk from 'chalk';
+import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
 const GENERATOR_MAP = {
@@ -14,71 +16,84 @@ export default class DubetterGenerator extends Base {
     constructor(...args) {
         super(...args);
 
-        this.argument('appname', {
-            type: String,
-            required: false,
-            defaults: this.appname,
-            desc: 'Project name'
-        });
-        this.appname = _.camelCase(this.appname);
+        try {
+            this.argument('projectName', {
+                type: String,
+                required: true,
+                desc: 'Project name'
+            });
+        }
+        catch (e) {
+            this.log(chalk.magenta('\nPlease provide Project Name\n'));
+            this.log(chalk.magenta('eg: yo dubetter projectName\n'));
+            process.exit(1);
+        }
 
-        this.option('name', {
-            type: String,
-            desc: 'Project name',
-            alias: 'n'
-        });
+        this.appName = _.camelCase(this.projectName);
 
-        this.option('test');
-        this.scriptSuffix = (this.options.test ? '.t': '.js');
+        mkdirp.sync(this.appName);
+
+        this.option('projectType', {
+            type: String,
+            desc: `Project Type ${chalk.cyan('Valid value: n (nodejs) or r (react) or v (vue)')}`,
+            alias: 'p'
+        });
+        this.projectType = this.options.projectType;
     }
 
-    default() {
+    prompting() {
+        switch (this.projectType) {
+            case 'n':
+                this.projectType = 'nodejs';
+                break;
+            case 'r':
+                this.projectType = 'react';
+                break;
+            case 'v':
+                this.projectType = 'vue';
+                break;
+            default:
+                const prompts = [{
+                    type: 'list',
+                    name: 'projectType',
+                    message: 'Project Type',
+                    choices: [
+                        {
+                            name: 'Npm Module',
+                            value: 'nodejs'
+                        },
+                        {
+                            name: 'React Project',
+                            value: 'react'
+                        },
+                        {
+                            name: 'Vue.js Project',
+                            value: 'vue'
+                        }
+                    ]
+                }];
+
+                return this.prompt(prompts).then(answers => {
+                    this.projectType = answers.projectType;
+                });
+            }
+    }
+
+    compose() {
         const ns = `dubetter:${this.projectType}`;
         const local = GENERATOR_MAP[this.projectType];
 
         if (ns) {
             this.composeWith(ns,
                 {
-                    options: this.options
+                    options: {
+                        appName: this.appName
+                    }
                 },
                 {
                     local: require.resolve(local)
                 }
             );
         }
-    }
-
-    prompting() {
-        const prompts = [{
-            type: 'list',
-            name: 'projectType',
-            message: 'Project Type',
-            choices: [
-                {
-                    name: 'Npm Module',
-                    value: 'nodejs'
-                },
-                {
-                    name: 'React Project',
-                    value: 'react'
-                },
-                {
-                    name: 'Vue.js Project',
-                    value: 'vue'
-                }
-            ]
-        }];
-
-        return this.prompt(prompts).then(answers => {
-            this.projectType = answers.projectType;
-        });
-    }
-
-    method1() {
-        this.log('hey 1', this.appname);
-    }
-
-    _private_method() {
-        this.log('private hey');
     }
 }
