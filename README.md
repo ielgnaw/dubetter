@@ -6,7 +6,7 @@ Install
 ------
 
     $ npm install -g yo
-    $ npm install generator-dubetter
+    $ npm install -g generator-dubetter
 
 
 Usage
