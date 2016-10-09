@@ -32,51 +32,32 @@ export default class DubetterGenerator extends Base {
         this.appName = _.camelCase(this.projectName);
 
         mkdirp.sync(this.appName);
-
-        this.option('projectType', {
-            type: String,
-            desc: `Project Type ${chalk.cyan('Valid value: n (nodejs) or r (react) or v (vue)')}`,
-            alias: 'p'
-        });
-        this.projectType = this.options.projectType;
     }
 
     prompting() {
-        switch (this.projectType) {
-            case 'n':
-                this.projectType = 'nodejs';
-                break;
-            case 'r':
-                this.projectType = 'react';
-                break;
-            case 'v':
-                this.projectType = 'vue';
-                break;
-            default:
-                const prompts = [{
-                    type: 'list',
-                    name: 'projectType',
-                    message: 'Project Type',
-                    choices: [
-                        {
-                            name: 'Npm Module',
-                            value: 'nodejs'
-                        },
-                        {
-                            name: 'React Project',
-                            value: 'react'
-                        },
-                        {
-                            name: 'Vue.js Project',
-                            value: 'vue'
-                        }
-                    ]
-                }];
+        const prompts = [{
+            type: 'list',
+            name: 'projectType',
+            message: 'Project Type',
+            choices: [
+                {
+                    name: 'Npm Module',
+                    value: 'nodejs'
+                },
+                {
+                    name: 'React Project',
+                    value: 'react'
+                },
+                {
+                    name: 'Vue.js Project',
+                    value: 'vue'
+                }
+            ]
+        }];
 
-                return this.prompt(prompts).then(answers => {
-                    this.projectType = answers.projectType;
-                });
-            }
+        return this.prompt(prompts).then(answers => {
+            this.projectType = answers.projectType;
+        });
     }
 
     compose() {

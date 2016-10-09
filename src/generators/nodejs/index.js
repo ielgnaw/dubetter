@@ -79,6 +79,11 @@ export default class NodejsGenerator extends Base {
             }
         );
 
+        this.fs.copyTpl(
+            this.templatePath('editorconfig'),
+            this.destinationPath(appName, '.editorconfig')
+        );
+
         this.directory(
             this.templatePath('test'),
             this.destinationPath(appName, 'test')
