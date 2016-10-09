@@ -9,7 +9,8 @@ import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
 const GENERATOR_MAP = {
-    nodejs: '../nodejs'
+    nodejs: '../nodejs',
+    reactredux: '../reactredux'
 };
 
 export default class DubetterGenerator extends Base {
@@ -45,8 +46,8 @@ export default class DubetterGenerator extends Base {
                     value: 'nodejs'
                 },
                 {
-                    name: 'React Project',
-                    value: 'react'
+                    name: 'React+Redux Project',
+                    value: 'reactredux'
                 },
                 {
                     name: 'Vue.js Project',

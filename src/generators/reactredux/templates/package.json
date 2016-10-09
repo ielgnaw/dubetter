@@ -1,0 +1,19 @@
+{
+  "name": "<%= appName %>",
+  "version": "0.0.1",
+  "description": "<%= appName %>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/gulp",
+    "build": "rm -rf output && gulp webpack:build"
+  },
+  "config": {
+    "ghooks": {
+      "pre-push": "fecs --reporter=baidu"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}
