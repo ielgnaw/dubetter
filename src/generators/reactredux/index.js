@@ -111,17 +111,17 @@ export default class NodejsGenerator extends Base {
      */
     install() {
         process.chdir(`${this.options.appName}/`);
-        // this.npmInstall([
-        //     'babel-core', 'babel-loader', 'babel-plugin-react-transform', 'babel-plugin-transform-class-properties',
-        //     'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
-        //     'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2', 'babel-register', 'babel-runtime',
-        //     'body-parser', 'cheerio', 'css-loader', 'eslint-friendly-formatter', 'express',
-        //     'extract-text-webpack-plugin', 'fecs', 'file-loader', 'ghooks', 'gulp', 'gulp-babel', 'gulp-util',
-        //     'gulp-watch', 'html-webpack-plugin', 'ora', 'postcss-loader', 'react-hot-loader',
-        //     'react-transform-catch-errors', 'rider', 'shelljs', 'style-loader', 'stylus', 'stylus-loader',
-        //     'transfer-webpack-plugin', 'url-loader', 'webpack', 'webpack-dashboard', 'webpack-dev-middleware',
-        //     'webpack-dev-server', 'webpack-hot-middleware', 'webpack-merge'
-        // ], {'saveDev': true});
+        this.npmInstall([
+            'babel-core', 'babel-loader', 'babel-plugin-react-transform', 'babel-plugin-transform-class-properties',
+            'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
+            'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2', 'babel-register', 'babel-runtime',
+            'body-parser', 'cheerio', 'css-loader', 'eslint-friendly-formatter', 'express',
+            'extract-text-webpack-plugin', 'fecs', 'file-loader', 'ghooks', 'gulp', 'gulp-babel', 'gulp-util',
+            'gulp-watch', 'html-webpack-plugin', 'ora', 'postcss-loader', 'react-hot-loader',
+            'react-transform-catch-errors', 'rider', 'shelljs', 'style-loader', 'stylus', 'stylus-loader',
+            'transfer-webpack-plugin', 'url-loader', 'webpack', 'webpack-dashboard', 'webpack-dev-middleware',
+            'webpack-dev-server', 'webpack-hot-middleware', 'webpack-merge'
+        ], {'saveDev': true});
     }
 
     /**
