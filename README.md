@@ -16,3 +16,8 @@ Usage
     $ yo dubetter [PROJECT_NAME]
 
    
+Example
+---
+
+- [Node.js](https://github.com/ielgnaw/boilerplate/tree/master/nodejs)
+- [React&Redux](https://github.com/ielgnaw/boilerplate/tree/master/react-redux-php)
