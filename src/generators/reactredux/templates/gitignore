@@ -8,3 +8,4 @@ test/e2e/reports
 templates_c/
 *.swo
 compile
+output

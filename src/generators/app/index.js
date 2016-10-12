@@ -42,17 +42,17 @@ export default class DubetterGenerator extends Base {
             message: 'Project Type',
             choices: [
                 {
-                    name: 'Npm Module',
+                    name: 'Npm Module Project',
                     value: 'nodejs'
                 },
                 {
-                    name: 'React+Redux Project',
+                    name: 'React & Redux project, use Smarty rendering template',
                     value: 'reactredux'
                 },
-                {
-                    name: 'Vue.js Project',
-                    value: 'vue'
-                }
+                // {
+                //     name: 'Vue.js Project',
+                //     value: 'vue'
+                // }
             ]
         }];
 

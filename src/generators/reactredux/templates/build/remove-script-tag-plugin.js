@@ -6,7 +6,6 @@
 import cheerio from 'cheerio';
 
 export default class RemoveScriptTagPlugin {
-
     apply(compiler) {
         compiler.plugin('compilation', (compilation) => {
             compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, callback) => {

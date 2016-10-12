@@ -1,9 +1,6 @@
-
-import gUtil from 'gulp-util';
-
 export function response(getArgs, postArgs) {
-    gUtil.log('getArgs', getArgs);
-    gUtil.log('postArgs', postArgs);
+    console.log('getArgs', getArgs);
+    console.log('postArgs', postArgs);
 
     return {
         status: 0,
@@ -15,4 +12,3 @@ export function response(getArgs, postArgs) {
         }
     };
 };
-

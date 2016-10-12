@@ -104,7 +104,7 @@ export default class NodejsGenerator extends Base {
             'babel-cli', 'babel-core', 'babel-preset-es2015', 'babel-preset-stage-2',
             'babel-istanbul', 'babel-plugin-add-module-exports',
             'fecs', 'chai', 'mocha'
-        ], {'saveDev': true});
+        ], {saveDev: true});
     }
 
     /**

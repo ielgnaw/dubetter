@@ -1,13 +1,19 @@
 <%= appName %>
+===
 
-Usage
----
-    
-    # install dependencies
-    npm install .
+## Build Setup
 
-    # dev
-    npm run dev
+``` bash
+# install dependencies
+npm install
 
-    # build
-    npm run build
+# serve with hot reload at localhost:8003
+npm run dev
+
+# build for production with minification
+npm run build
+
+# lint
+npm run lint
+
+```

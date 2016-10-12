@@ -4,16 +4,19 @@
   "description": "<%= appName %>",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/.bin/gulp",
-    "build": "rm -rf output && gulp webpack:build"
+    "dev": "babel-node build/dev-server.js",
+    "lint": "fecs --reporter=baidu",
+    "build": "rm -rf output && babel-node build/build.js"
   },
   "config": {
     "ghooks": {
       "pre-push": "fecs --reporter=baidu"
     }
   },
-  "author": "",
+  "author": "ielgnaw",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
 }

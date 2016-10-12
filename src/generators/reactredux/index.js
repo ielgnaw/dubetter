@@ -15,17 +15,13 @@ export default class NodejsGenerator extends Base {
     }
 
     /**
-     * 创建文件夹
+     * 复制目录
      */
-    creating() {
+    copyDirectory() {
         const appName = this.options.appName;
-        mkdirp.sync(appName, 'src');
-        mkdirp.sync(appName, 'src/actions');
-        mkdirp.sync(appName, 'src/components');
-        mkdirp.sync(appName, 'src/css');
-        mkdirp.sync(appName, 'src/css/img');
-        mkdirp.sync(appName, 'src/reducers');
-        mkdirp.sync(appName, 'src/util');
+        ['build', 'config', 'entry', 'mock', 'src'].forEach(item => {
+            this.fs.copy(this.templatePath(item), this.destinationPath(appName, item));
+        })
     }
 
     /**
@@ -37,11 +33,6 @@ export default class NodejsGenerator extends Base {
         this.fs.copyTpl(
             this.templatePath('babelrc'),
             this.destinationPath(appName, '.babelrc')
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('config.js'),
-            this.destinationPath(appName, 'config.js')
         );
 
         this.fs.copyTpl(
@@ -65,23 +56,8 @@ export default class NodejsGenerator extends Base {
         );
 
         this.fs.copyTpl(
-            this.templatePath('gulpfile.babel.js'),
-            this.destinationPath(appName, 'gulpfile.babel.js')
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('index.php'),
-            this.destinationPath(appName, 'index.php')
-        );
-
-        this.fs.copyTpl(
             this.templatePath('jshintrc'),
             this.destinationPath(appName, '.jshintrc')
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('main.tpl'),
-            this.destinationPath(appName, 'main.tpl')
         );
 
         this.fs.copyTpl(
@@ -99,11 +75,6 @@ export default class NodejsGenerator extends Base {
                 appName: appName
             }
         );
-
-        this.fs.copyTpl(
-            this.templatePath('webpack.config.js'),
-            this.destinationPath(appName, 'webpack.config.js')
-        );
     }
 
     /**
@@ -112,16 +83,17 @@ export default class NodejsGenerator extends Base {
     install() {
         process.chdir(`${this.options.appName}/`);
         this.npmInstall([
-            'babel-core', 'babel-loader', 'babel-plugin-react-transform', 'babel-plugin-transform-class-properties',
-            'babel-plugin-transform-object-assign', 'babel-plugin-transform-runtime',
-            'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2', 'babel-register', 'babel-runtime',
-            'body-parser', 'cheerio', 'css-loader', 'eslint-friendly-formatter', 'express',
-            'extract-text-webpack-plugin', 'fecs', 'file-loader', 'ghooks', 'gulp', 'gulp-babel', 'gulp-util',
-            'gulp-watch', 'html-webpack-plugin', 'ora', 'postcss-loader', 'react-hot-loader',
-            'react-transform-catch-errors', 'rider', 'shelljs', 'style-loader', 'stylus', 'stylus-loader',
-            'transfer-webpack-plugin', 'url-loader', 'webpack', 'webpack-dashboard', 'webpack-dev-middleware',
-            'webpack-dev-server', 'webpack-hot-middleware', 'webpack-merge'
-        ], {'saveDev': true});
+            'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'reqwest'
+        ], {save: true});
+        this.npmInstall([
+            'autoprefixer', 'babel-cli', 'babel-core', 'babel-loader', 'babel-plugin-add-module-exports',
+            'babel-plugin-transform-runtime', 'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2',
+            'body-parser', 'cheerio', 'compression-webpack-plugin', 'css-loader', 'eslint-friendly-formatter',
+            'eventsource-polyfill', 'express', 'extract-text-webpack-plugin', 'fecs', 'file-loader', 'handlebars',
+            'html-webpack-plugin', 'http-proxy-middleware', 'json-loader', 'ora', 'postcss-loader', 'rider',
+            'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader', 'vue-style-loader', 'webpack',
+            'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
+        ], {saveDev: true});
     }
 
     /**

@@ -7,7 +7,6 @@ import path from 'path';
 import fs from 'fs';
 import url from 'url';
 import queryString from 'querystring';
-import gUtil from 'gulp-util';
 
 const requestHandler = (req) => {
     const pathName = req.path || '';
@@ -17,7 +16,7 @@ const requestHandler = (req) => {
         return false;
     }
 
-    gUtil.log('Ajax Request Path: ', pathName);
+    console.log('Ajax Request Path: ', pathName);
 
     delete require.cache[require.resolve(mockFilePath)];
     var mockDataHandler = require(mockFilePath);

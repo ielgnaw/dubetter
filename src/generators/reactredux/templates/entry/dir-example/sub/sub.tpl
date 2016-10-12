@@ -6,14 +6,17 @@
         <meta name="format-detection" content="telephone=no, email=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="referrer" content="never" />
-        <title> title </title>
+        <title> dir-example sub </title>
     </head>
     <body>
+        <div class="aaa"></div>
+        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" />
         <div id="root"></div>
         <script>
-            var tplData = {%json_encode($data)%};
-            console.warn('tplData', tplData);
+            var data = {%json_encode($data)%};
+            console.warn(data, 'tpl');
         </script>
-        <script src="/main.js" replace="1"></script>
+        <script src="/sub.js" replace="1"></script>
     </body>
 </html>
+
