@@ -21,3 +21,4 @@ Example
 
 - [Node.js](https://github.com/ielgnaw/boilerplate/tree/master/nodejs)
 - [React&Redux](https://github.com/ielgnaw/boilerplate/tree/master/react-redux-php)
+- [React](https://github.com/ielgnaw/boilerplate/tree/master/react-php)

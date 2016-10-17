@@ -5,12 +5,12 @@
 
 import _ from 'lodash';
 import chalk from 'chalk';
-import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
 const GENERATOR_MAP = {
     nodejs: '../nodejs',
-    reactredux: '../reactredux'
+    reactredux: '../reactredux',
+    react: '../react'
 };
 
 export default class DubetterGenerator extends Base {
@@ -31,8 +31,6 @@ export default class DubetterGenerator extends Base {
         }
 
         this.appName = _.camelCase(this.projectName);
-
-        mkdirp.sync(this.appName);
     }
 
     prompting() {
@@ -49,6 +47,10 @@ export default class DubetterGenerator extends Base {
                     name: 'React & Redux project, use Smarty rendering template',
                     value: 'reactredux'
                 },
+                {
+                    name: 'React project, use Smarty rendering template',
+                    value: 'react'
+                }
                 // {
                 //     name: 'Vue.js Project',
                 //     value: 'vue'

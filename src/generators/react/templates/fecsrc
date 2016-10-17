@@ -1,0 +1,16 @@
+files:
+    - src
+eslint:
+    env:
+        es6: true
+    rules:
+        no-console: 0
+        fecs-camelcase:
+            - 2
+            -
+                ignore:
+                    - "/_/"
+        fecs-min-vars-per-destructure: false
+    globals:
+        # 百度框的端能力框架
+        Box: true

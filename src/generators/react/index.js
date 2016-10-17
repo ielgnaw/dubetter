@@ -1,5 +1,5 @@
 /**
- * @file NodejsGenerator entry
+ * @file ReactReduxGenerator entry
  * @author ielgnaw(wuji0223@gmail.com)
  */
 
@@ -9,16 +9,29 @@ import chalk from 'chalk';
 import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
-const DEV_DEPENDENCIES = [
-    'babel-cli', 'babel-core', 'babel-preset-es2015', 'babel-preset-stage-2',
-    'babel-istanbul', 'babel-plugin-add-module-exports', 'fecs', 'chai', 'mocha'
+const DEPENDENCIES = [
+    'react', 'react-dom', 'reqwest'
 ];
 
-export default class NodejsGenerator extends Base {
+const DEV_DEPENDENCIES = [
+    'autoprefixer', 'babel-cli', 'babel-core', 'babel-loader', 'babel-plugin-add-module-exports',
+    'babel-plugin-transform-runtime', 'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2',
+    'body-parser', 'cheerio', 'compression-webpack-plugin', 'css-loader', 'eslint-friendly-formatter',
+    'eventsource-polyfill', 'express', 'extract-text-webpack-plugin', 'fecs', 'file-loader', 'handlebars',
+    'html-webpack-plugin', 'http-proxy-middleware', 'json-loader', 'ora', 'postcss-loader', 'rider',
+    'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader', 'vue-style-loader', 'webpack',
+    'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
+];
+
+export default class ReactGenerator extends Base {
     constructor(...args) {
         super(...args);
 
         this.appName = this.options.appName;
+
+        if (DEPENDENCIES.indexOf(this.appName) !== -1) {
+            this.env.error(chalk.magenta('Project name can\'t be the same as dependencies names'));
+        }
 
         if (DEV_DEPENDENCIES.indexOf(this.appName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as devDependencies names'));
@@ -28,10 +41,12 @@ export default class NodejsGenerator extends Base {
     }
 
     /**
-     * 创建文件夹
+     * 复制目录
      */
-    creating() {
-        mkdirp.sync(this.appName, 'src');
+    copyDirectory() {
+        ['build', 'config', 'entry', 'mock', 'src'].forEach(item => {
+            this.fs.copy(this.templatePath(item), this.destinationPath(this.appName, item));
+        })
     }
 
     /**
@@ -44,8 +59,8 @@ export default class NodejsGenerator extends Base {
         );
 
         this.fs.copyTpl(
-            this.templatePath('jshintrc'),
-            this.destinationPath(this.appName, '.jshintrc')
+            this.templatePath('editorconfig'),
+            this.destinationPath(this.appName, '.editorconfig')
         );
 
         this.fs.copyTpl(
@@ -59,18 +74,13 @@ export default class NodejsGenerator extends Base {
         );
 
         this.fs.copyTpl(
-            this.templatePath('npmignore'),
-            this.destinationPath(this.appName, '.npmignore')
-        );
-
-        this.fs.copyTpl(
             this.templatePath('gitignore'),
             this.destinationPath(this.appName, '.gitignore')
         );
 
         this.fs.copyTpl(
-            this.templatePath('travis.yml'),
-            this.destinationPath(this.appName, '.travis.yml')
+            this.templatePath('jshintrc'),
+            this.destinationPath(this.appName, '.jshintrc')
         );
 
         this.fs.copyTpl(
@@ -88,21 +98,6 @@ export default class NodejsGenerator extends Base {
                 appName: this.appName
             }
         );
-
-        this.fs.copyTpl(
-            this.templatePath('editorconfig'),
-            this.destinationPath(this.appName, '.editorconfig')
-        );
-
-        this.directory(
-            this.templatePath('test'),
-            this.destinationPath(this.appName, 'test')
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('Person.js'),
-            this.destinationPath(this.appName, 'src/Person.js')
-        );
     }
 
     /**
@@ -110,6 +105,7 @@ export default class NodejsGenerator extends Base {
      */
     install() {
         process.chdir(`${this.appName}/`);
+        this.npmInstall(DEPENDENCIES, {save: true});
         this.npmInstall(DEV_DEPENDENCIES, {saveDev: true});
     }
 
