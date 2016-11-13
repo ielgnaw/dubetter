@@ -9,7 +9,7 @@ import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
 const DEPENDENCIES = [
-    'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'reqwest'
+    'react', 'react-dom', 'reqwest'
 ];
 
 const DEV_DEPENDENCIES = [
@@ -22,7 +22,7 @@ const DEV_DEPENDENCIES = [
     'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
 ];
 
-export default class NodejsGenerator extends Base {
+export default class ReactGenerator extends Base {
     constructor(...args) {
         super(...args);
 
@@ -43,9 +43,9 @@ export default class NodejsGenerator extends Base {
      * 复制目录
      */
     copyDirectory() {
-        ['build', 'config', 'mock', 'src'].forEach(item => {
+        ['build', 'config', 'entry', 'mock', 'src'].forEach(item => {
             this.fs.copy(this.templatePath(item), this.destinationPath(this.appName, item));
-        });
+        })
     }
 
     /**
@@ -96,11 +96,6 @@ export default class NodejsGenerator extends Base {
             {
                 appName: this.appName
             }
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('index.html'),
-            this.destinationPath(this.appName, 'index.html')
         );
     }
 

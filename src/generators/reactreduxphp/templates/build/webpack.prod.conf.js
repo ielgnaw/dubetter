@@ -19,6 +19,36 @@ import baseWebpackConfig from './webpack.base.conf';
 const env = process.env.NODE_ENV === 'testing' ? require('../config/test.env') : config.build.env;
 
 /**
+ * entry 下所有的 tpl 文件集合
+ *
+ * @type {Array}
+ */
+const entryTplList = [];
+
+/**
+ * 遍历 entry 下的 tpl 文件
+ *
+ * @param {string} filePath 遍历的目录
+ */
+(function walkTpl(filePath) {
+    var dirList = fs.readdirSync(filePath);
+    dirList.forEach(function (item) {
+        if (fs.statSync(filePath + '/' + item).isDirectory()) {
+            walkTpl(filePath + '/' + item);
+        }
+        else {
+            const extname = path.extname(item);
+            if (extname === '.tpl' || extname === '.html') {
+                entryTplList.push({
+                    chunksName: path.basename(item).replace(extname, ''),
+                    filename: path.relative('.', filePath + '/' + item)
+                });
+            }
+        }
+    });
+})(path.join(__dirname, '..', 'entry'));
+
+/**
  * webpack plugin 集合
  *
  * @type {Array}
@@ -40,37 +70,23 @@ const webpackPluginList = [
     new webpack.optimize.OccurenceOrderPlugin(),
 
     // extract css into its own file
-    new ExtractTextPlugin(assetsPath('css/[name].[contenthash].css')),
-
-    new HtmlWebpackPlugin({
-        filename: config.build.index,
-        template: 'index.html',
-        inject: 'body',
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true
-        },
-        // 如果打开 vendor 和 manifest 那么需要配置 chunksSortMode 保证引入 script 的顺序
-        chunksSortMode: 'dependency'
-    }),
-
-    // split vendor js into its own file
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: (module, count) => module.resource
-            && /\.js$/.test(module.resource)
-            && module.resource.indexOf(
-                path.join(__dirname, '../node_modules')
-            ) === 0
-    }),
-
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        chunks: ['vendor']
-    })
+    new ExtractTextPlugin(assetsPath('css/[name].[contenthash].css'))
 ];
+
+entryTplList.forEach(item => {
+    webpackPluginList.push(
+        new HtmlWebpackPlugin({
+            filename: item.filename,
+            template: item.filename,
+            inject: 'body',
+            chunks: [item.chunksName],
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        })
+    );
+});
 
 const webpackConfig = merge(baseWebpackConfig, {
     module: {

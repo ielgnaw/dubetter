@@ -25,6 +25,7 @@ const assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDire
 
 rm('-rf', assetsPath);
 mkdir('-p', assetsPath);
+// cp('-R', 'static/', assetsPath);
 
 webpack(webpackConfig, (err, stats) => {
     spinner.stop()

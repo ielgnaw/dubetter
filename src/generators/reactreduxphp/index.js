@@ -3,14 +3,13 @@
  * @author ielgnaw(wuji0223@gmail.com)
  */
 
-import _ from 'lodash';
 import path from 'path';
 import chalk from 'chalk';
 import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
 const DEPENDENCIES = [
-    'react', 'react-dom', 'reqwest'
+    'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'reqwest'
 ];
 
 const DEV_DEPENDENCIES = [
@@ -23,7 +22,8 @@ const DEV_DEPENDENCIES = [
     'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
 ];
 
-export default class ReactGenerator extends Base {
+
+export default class NodejsGenerator extends Base {
     constructor(...args) {
         super(...args);
 
@@ -46,7 +46,7 @@ export default class ReactGenerator extends Base {
     copyDirectory() {
         ['build', 'config', 'entry', 'mock', 'src'].forEach(item => {
             this.fs.copy(this.templatePath(item), this.destinationPath(this.appName, item));
-        })
+        });
     }
 
     /**
@@ -111,7 +111,6 @@ export default class ReactGenerator extends Base {
 
     /**
      * 安装结束、清除文件、设置good bye文案、等
-     * @return {[type]} [description]
      */
     end() {
         this.log(chalk.cyan('\nProject create success'));

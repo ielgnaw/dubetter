@@ -3,14 +3,15 @@
  * @author ielgnaw(wuji0223@gmail.com)
  */
 
-import _ from 'lodash';
+import kebabCase from 'lodash.kebabcase';
 import chalk from 'chalk';
 import {Base} from 'yeoman-generator';
 
 const GENERATOR_MAP = {
     nodejs: '../nodejs',
+    reactreduxphp: '../reactreduxphp',
     reactredux: '../reactredux',
-    react: '../react'
+    reactphp: '../reactphp'
 };
 
 export default class DubetterGenerator extends Base {
@@ -30,7 +31,7 @@ export default class DubetterGenerator extends Base {
             process.exit(1);
         }
 
-        this.appName = _.camelCase(this.projectName);
+        this.appName = kebabCase(this.projectName);
     }
 
     prompting() {
@@ -45,11 +46,15 @@ export default class DubetterGenerator extends Base {
                 },
                 {
                     name: 'React & Redux project, use Smarty rendering template',
+                    value: 'reactreduxphp'
+                },
+                {
+                    name: 'React & Redux project, Pure FE Project',
                     value: 'reactredux'
                 },
                 {
                     name: 'React project, use Smarty rendering template',
-                    value: 'react'
+                    value: 'reactphp'
                 }
                 // {
                 //     name: 'Vue.js Project',

@@ -12,7 +12,9 @@ import proxyMiddleware from 'http-proxy-middleware';
 import handlebars from 'handlebars';
 
 import config from '../config';
+import phpMiddleware from './php-middleware';
 import ajaxMiddleware from './ajax-middleware';
+import mockRouteMiddleWare from './mock-route-middleware';
 import {getIP} from './utils';
 
 const webpackConfig = process.env.NODE_ENV === 'testing'
@@ -51,9 +53,48 @@ Object.keys(proxyTable).forEach(context => {
     app.use(proxyMiddleware(context, options));
 });
 
+app.get(/\/$/, (req, res) => {
+    const dirPath = path.join(process.cwd(), 'entry', req.path);
+    fs.readdir(dirPath, (err, files) => {
+        const list = [];
+        files.forEach(file => {
+            const stat = fs.statSync(path.join(dirPath, file));
+            const size = stat.size;
+            const mtime = stat.mtime;
+
+            let name;
+            let url;
+            if (stat.isDirectory()) {
+                name = `${file}/`;
+                url = `${encodeURIComponent(file)}/`;
+            }
+            else {
+                name = file;
+                const extname = path.extname(file);
+                if (req.path !== '/') {
+                    /^\/(.*)/.test(req.path);
+                    url = `/mock${path.sep}${RegExp.$1}${encodeURIComponent(file.replace(extname, ''))}.php`;
+                }
+                else {
+                    url = `mock${path.sep}${encodeURIComponent(file.replace(extname, ''))}.php`;
+                }
+            }
+            list.push({name, url, size, mtime});
+        });
+
+        const tplStr = fs.readFileSync(path.join(__dirname, 'dirlist.tpl'), 'utf8');
+        const tpl = handlebars.compile(tplStr);
+        const html = tpl({'files': list});
+        res.setHeader('Content-Type', 'text/html');
+        res.end(html);
+    });
+});
+
 app.use(devMiddleware);
 
 app.use(hotMiddleware);
+
+app.use(phpMiddleware);
 
 app.use(bodyParser.json());
 
@@ -62,6 +103,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(ajaxMiddleware);
+
+app.use(mockRouteMiddleWare);
 
 // serve pure static assets
 // var staticPath = path.posix.join(config.build.assetsPublicPath, config.build.assetsSubDirectory);

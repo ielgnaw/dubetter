@@ -14,7 +14,9 @@ const PROJECT_ROOT = path.resolve(__dirname, '../');
 
 export default {
     entry: {
-        'main': './src/main.js'
+        'example': './src/main.js',
+        'dir-example': './src/main.js',
+        'sub': './src/main.js',
     },
     output: {
         path: config.build.assetsRoot,
@@ -22,7 +24,7 @@ export default {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['', '.js', '.jsx', '.php'],
         fallback: [path.join(__dirname, '../node_modules')],
         alias: {
             'src': path.resolve(__dirname, '../src')
@@ -54,6 +56,15 @@ export default {
                 test: /\.json$/,
                 loader: 'json'
             },
+            // {
+            //     test: /\.css$/,
+            //     loader: 'style!css'
+            // },
+            // {
+            //     test: /\.styl$/,
+            //     loader: 'style!css!postcss!stylus'
+            // },
+
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url',

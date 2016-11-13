@@ -3,7 +3,6 @@
  * @author ielgnaw(wuji0223@gmail.com)
  */
 
-import _ from 'lodash';
 import path from 'path';
 import chalk from 'chalk';
 import mkdirp from 'mkdirp';
@@ -115,7 +114,6 @@ export default class NodejsGenerator extends Base {
 
     /**
      * 安装结束、清除文件、设置good bye文案、等
-     * @return {[type]} [description]
      */
     end() {
         this.log(chalk.cyan('\nProject create success'));

@@ -20,6 +20,36 @@ Object.keys(baseWebpackConfig.entry).forEach(name => {
 });
 
 /**
+ * entry 下所有的 tpl 文件集合
+ *
+ * @type {Array}
+ */
+const entryTplList = [];
+
+/**
+ * 遍历 entry 下的 tpl 文件
+ *
+ * @param {string} filePath 遍历的目录
+ */
+(function walkTpl(filePath) {
+    var dirList = fs.readdirSync(filePath);
+    dirList.forEach(function (item) {
+        if (fs.statSync(filePath + '/' + item).isDirectory()) {
+            walkTpl(filePath + '/' + item);
+        }
+        else {
+            const extname = path.extname(item);
+            if (extname === '.tpl' || extname === '.html') {
+                entryTplList.push({
+                    chunksName: path.basename(item).replace(extname, ''),
+                    filename: path.relative('.', filePath + '/' + item)
+                });
+            }
+        }
+    });
+})(path.join(__dirname, '..', 'entry'));
+
+/**
  * webpack plugin 集合
  *
  * @type {Array}
@@ -36,14 +66,19 @@ const webpackPluginList = [
 
     new webpack.NoErrorsPlugin(),
 
-    new webpack.optimize.DedupePlugin(),
-
-    new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'index.html',
-        inject: true
-    })
+    new webpack.optimize.DedupePlugin()
 ];
+
+entryTplList.forEach(item => {
+    webpackPluginList.push(
+        new HtmlWebpackPlugin({
+            filename: item.filename,
+            template: item.filename,
+            inject: true,
+            chunks: [item.chunksName]
+        })
+    );
+});
 
 export default merge(baseWebpackConfig, {
     module: {
