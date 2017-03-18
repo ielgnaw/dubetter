@@ -65,9 +65,7 @@ const webpackPluginList = [
 
     new webpack.HotModuleReplacementPlugin(),
 
-    new webpack.NoErrorsPlugin(),
-
-    new webpack.optimize.DedupePlugin(),
+    new webpack.NoErrorsPlugin()
 ];
 
 entryTplList.forEach(item => {
