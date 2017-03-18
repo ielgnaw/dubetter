@@ -16,9 +16,9 @@ const DEV_DEPENDENCIES = [
     'autoprefixer', 'babel-cli', 'babel-core', 'babel-loader', 'babel-plugin-add-module-exports',
     'babel-plugin-transform-runtime', 'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2',
     'body-parser', 'cheerio', 'compression-webpack-plugin', 'css-loader', 'eslint-friendly-formatter',
-    'eventsource-polyfill', 'express', 'extract-text-webpack-plugin', 'fecs', 'file-loader', 'handlebars',
+    'eventsource-polyfill', 'express', 'extract-text-webpack-plugin@v1', 'fecs', 'file-loader', 'handlebars',
     'html-webpack-plugin', 'http-proxy-middleware', 'json-loader', 'ora', 'postcss-loader', 'rider',
-    'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader', 'vue-style-loader', 'webpack',
+    'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader', 'vue-style-loader', 'webpack@v1',
     'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
 ];
 

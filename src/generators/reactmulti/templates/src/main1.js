@@ -1,0 +1,29 @@
+/**
+ * @file 主入口
+ * @author ielgnaw(wuji0223@gmail.com)
+ */
+
+import React, {Component} from 'react';
+import {render} from 'react-dom';
+import AjaxButton from './components/AjaxButton';
+
+require('./main.styl');
+
+render(
+    <div>
+        <ul>
+            <li>333</li>
+            <li>444</li>
+            <li>ttt</li>
+        </ul>
+        <span className="ccc"></span>
+        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" />
+        <img src={require('./css/img/react-logo.png')} style={{height: '50px', width: '50px'}}/>
+        <br/>
+        <i className="icon-mute iconfont"></i>
+        <br/>
+        <AjaxButton start={1}/>
+    </div>,
+    document.getElementById('root')
+);
+

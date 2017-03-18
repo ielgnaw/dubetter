@@ -12,9 +12,8 @@ Install
 Usage
 ---
     
+    $ yo dubetter
     $ yo dubetter -h
-    $ yo dubetter [PROJECT_NAME]
-
    
 Example
 ---
@@ -23,3 +22,4 @@ Example
 - [React&Redux](https://github.com/ielgnaw/boilerplate/tree/master/pure-react-redux)
 - [React&Redux&Smarty](https://github.com/ielgnaw/boilerplate/tree/master/react-redux-php)
 - [React](https://github.com/ielgnaw/boilerplate/tree/master/react-php)
+- [React Multipage](https://github.com/ielgnaw/boilerplate/tree/master/pure-react-multipage)
