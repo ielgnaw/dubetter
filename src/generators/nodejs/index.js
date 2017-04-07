@@ -17,20 +17,26 @@ export default class NodejsGenerator extends Base {
     constructor(...args) {
         super(...args);
 
-        this.appName = this.options.appName;
+        this.path = this.options.isCreateProjectDir
+            ? this.options.appName
+            : '.';
 
-        if (DEV_DEPENDENCIES.indexOf(this.appName) !== -1) {
+        if (DEV_DEPENDENCIES.indexOf(this.options.appName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as devDependencies names'));
         }
 
-        mkdirp.sync(this.appName);
+        if (this.options.isCreateProjectDir) {
+            mkdirp.sync(this.path);
+        }
     }
 
     /**
-     * 创建文件夹
+     * 复制目录
      */
-    creating() {
-        mkdirp.sync(this.appName, 'src');
+    copyDirectory() {
+        ['src', 'test'].forEach(item => {
+            this.fs.copy(this.templatePath(item), this.destinationPath(this.path, item));
+        });
     }
 
     /**
@@ -39,68 +45,58 @@ export default class NodejsGenerator extends Base {
     copyTpl() {
         this.fs.copyTpl(
             this.templatePath('babelrc'),
-            this.destinationPath(this.appName, '.babelrc')
+            this.destinationPath(this.path, '.babelrc')
         );
 
         this.fs.copyTpl(
             this.templatePath('jshintrc'),
-            this.destinationPath(this.appName, '.jshintrc')
+            this.destinationPath(this.path, '.jshintrc')
         );
 
         this.fs.copyTpl(
             this.templatePath('eslintrc'),
-            this.destinationPath(this.appName, '.eslintrc')
+            this.destinationPath(this.path, '.eslintrc')
         );
 
         this.fs.copyTpl(
             this.templatePath('fecsrc'),
-            this.destinationPath(this.appName, '.fecsrc')
+            this.destinationPath(this.path, '.fecsrc')
         );
 
         this.fs.copyTpl(
             this.templatePath('npmignore'),
-            this.destinationPath(this.appName, '.npmignore')
+            this.destinationPath(this.path, '.npmignore')
         );
 
         this.fs.copyTpl(
             this.templatePath('gitignore'),
-            this.destinationPath(this.appName, '.gitignore')
+            this.destinationPath(this.path, '.gitignore')
         );
 
         this.fs.copyTpl(
             this.templatePath('travis.yml'),
-            this.destinationPath(this.appName, '.travis.yml')
+            this.destinationPath(this.path, '.travis.yml')
         );
 
         this.fs.copyTpl(
             this.templatePath('package.json'),
-            this.destinationPath(this.appName, 'package.json'),
+            this.destinationPath(this.path, 'package.json'),
             {
-                appName: this.appName
+                appName: this.options.appName
             }
         );
 
         this.fs.copyTpl(
             this.templatePath('README.md'),
-            this.destinationPath(this.appName, 'README.md'),
+            this.destinationPath(this.path, 'README.md'),
             {
-                appName: this.appName
+                appName: this.options.appName
             }
         );
 
         this.fs.copyTpl(
             this.templatePath('editorconfig'),
-            this.destinationPath(this.appName, '.editorconfig')
-        );
-
-        this.directory(
-            this.templatePath('test'),
-            this.destinationPath(this.appName, 'test')
-        );
-
-        this.fs.copyTpl(
-            this.templatePath('Person.js'),
-            this.destinationPath(this.appName, 'src/Person.js')
+            this.destinationPath(this.path, '.editorconfig')
         );
     }
 
@@ -108,7 +104,7 @@ export default class NodejsGenerator extends Base {
      * 安装依赖
      */
     install() {
-        process.chdir(`${this.appName}/`);
+        process.chdir(`${this.path}/`);
         this.npmInstall(DEV_DEPENDENCIES, {saveDev: true});
     }
 
@@ -117,6 +113,6 @@ export default class NodejsGenerator extends Base {
      */
     end() {
         this.log(chalk.cyan('\nProject create success'));
-        this.log(chalk.cyan(`\nFor more information, please see ${this.appName}${path.sep}README.md\n`));
+        this.log(chalk.cyan(`\nFor more information, please see ${this.path}${path.sep}README.md\n`));
     }
 }
