@@ -1,10 +1,10 @@
 /**
  * @file webpack prod config
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import fs from 'fs';
-import path from 'path';
+import {basename, relative, join, extname} from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -15,8 +15,6 @@ import RemoveScriptTagPlugin from './remove-script-tag-plugin';
 import config from '../config';
 import {assetsPath, styleLoaders} from './utils';
 import baseWebpackConfig from './webpack.base.conf';
-
-const env = process.env.NODE_ENV === 'testing' ? require('../config/test.env') : config.build.env;
 
 /**
  * entry 下所有的 tpl 文件集合
@@ -37,16 +35,16 @@ const entryTplList = [];
             walkTpl(filePath + '/' + item);
         }
         else {
-            const extname = path.extname(item);
-            if (extname === '.tpl' || extname === '.html') {
+            const ext = extname(item);
+            if (ext === '.tpl' || ext === '.html') {
                 entryTplList.push({
-                    chunksName: path.basename(item).replace(extname, ''),
-                    filename: path.relative('.', filePath + '/' + item)
+                    chunksName: basename(item).replace(ext, ''),
+                    filename: relative('.', filePath + '/' + item)
                 });
             }
         }
     });
-})(path.join(__dirname, '..', 'entry'));
+})(join(__dirname, '..', 'entry'));
 
 /**
  * webpack plugin 集合
@@ -55,29 +53,33 @@ const entryTplList = [];
  */
 const webpackPluginList = [
     new webpack.DefinePlugin({
-        'process.env': env
+        'process.env': config.build.env
     }),
-
     new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
         compress: {
-            warnings: false
+            // 在 UglifyJs 删除没有用到的代码时不输出警告
+            warnings: false,
+            // 删除所有的 console，可以兼容 ie 浏览器
+            drop_console: true,
+            // 内嵌定义了但是只用到一次的变量
+            collapse_vars: true,
+            // 提取出出现多次但是没有定义成变量去引用的静态值
+            reduce_vars: true,
         },
         output: {
             comments: false
         }
     }),
-
-    new webpack.optimize.OccurenceOrderPlugin(),
-
     // extract css into its own file
-    new ExtractTextPlugin(assetsPath('css/[name].[contenthash].css')),
+    new ExtractTextPlugin(assetsPath('css/[name].[contenthash].css'))
 ];
 
 entryTplList.forEach(item => {
     webpackPluginList.push(
         new HtmlWebpackPlugin({
             filename: `${item.chunksName}.html`,
-            template: path.join(__dirname, `../entry/${item.chunksName}.html`),
+            template: join(__dirname, `../entry/${item.chunksName}.html`),
             inject: 'body',
             chunks: [item.chunksName.replace('index', 'main')],
             minify: {
@@ -98,9 +100,7 @@ Array.prototype.push.apply(webpackPluginList, [
         name: 'vendor',
         minChunks: (module, count) => module.resource
             && /\.js$/.test(module.resource)
-            && module.resource.indexOf(
-                path.join(__dirname, '../node_modules')
-            ) === 0
+            && module.resource.indexOf(join(__dirname, '../node_modules')) === 0
     }),
     /* eslint-enable fecs-use-method-definition */
 
@@ -114,7 +114,7 @@ Array.prototype.push.apply(webpackPluginList, [
 
 const webpackConfig = merge(baseWebpackConfig, {
     module: {
-        loaders: styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
+        rules: styleLoaders({sourceMap: config.build.productionSourceMap, extract: true})
     },
     devtool: config.build.productionSourceMap ? '#eval-source-map' : false,
     output: {

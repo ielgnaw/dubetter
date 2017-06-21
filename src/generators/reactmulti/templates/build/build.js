@@ -1,10 +1,9 @@
 /**
  * @file build
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import 'shelljs/global';
-env.NODE_ENV = 'production';
 
 import path from 'path';
 import ora from 'ora';

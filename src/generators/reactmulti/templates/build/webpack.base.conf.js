@@ -1,16 +1,17 @@
 /**
  * @file webpack base config
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
-import path from 'path';
+import {resolve, join} from 'path';
 import autoprefixer from 'autoprefixer';
 import rider from 'rider';
 
 import config from '../config';
 import {assetsPath} from './utils';
 
-const PROJECT_ROOT = path.resolve(__dirname, '../');
+const PROJECT_ROOT = resolve(__dirname, '../src');
+const NODE_MODULES_DIR = resolve(__dirname, '../node_modules');
 
 export default {
     entry: {
@@ -23,57 +24,45 @@ export default {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
-        fallback: [path.join(__dirname, '../node_modules')],
+        extensions: ['.js', '.jsx'],
+        modules: [NODE_MODULES_DIR, 'node_modules'],
         alias: {
-            'src': path.resolve(__dirname, '../src')
+            'src': PROJECT_ROOT,
+            'react': 'react/dist/react.js',
+            'react-dom': 'react-dom/dist/react-dom.js'
         }
     },
-    resolveLoader: {
-        fallback: [path.join(__dirname, '../node_modules')]
-    },
-    postcss: [
-        autoprefixer({
-            browsers: ['iOS >= 7', 'Android >= 4.0']
-        })
-    ],
-    stylus: {
-        use: [rider()]
-    },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
-                loader: 'babel',
+                loader: 'babel-loader?cacheDirectory',
                 include: PROJECT_ROOT,
-                exclude: /node_modules/,
-                query: {
+                exclude: /(node_modules|bower_components)/,
+                options: {
                     presets: ['react', 'es2015', 'stage-2']
                 }
             },
             {
                 test: /\.json$/,
-                loader: 'json'
+                loader: 'json-loader'
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url',
-                query: {
-                    limit: 100000,
+                loader: 'url-loader',
+                options: {
+                    limit: 1000,
                     name: assetsPath('img/[name].[hash:7].[ext]')
                 }
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url',
-                query: {
-                    limit: 100000,
-                    name: assetsPath('fonts/[name].[hash:7].[ext]')
+                loader: 'url-loader',
+                options: {
+                    limit: 1000,
+                    name: assetsPath('font/[name].[hash:7].[ext]')
                 }
             }
         ]
-    },
-    eslint: {
-        formatter: require('eslint-friendly-formatter')
     }
 };

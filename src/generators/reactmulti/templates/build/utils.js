@@ -1,64 +1,82 @@
 /**
  * @file utils
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import path from 'path';
-import config from '../config';
+import autoprefixer from 'autoprefixer';
+import rider from 'rider';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import config from '../config';
 
 export function assetsPath(_path) {
     return path.posix.join(config.build.assetsSubDirectory, _path);
 }
 
 export function cssLoaders(options = {}) {
-    const generateLoaders = (loaders) => {
-        const sourceLoader = loaders.map((loader) => {
-            let extraParamChar;
-            if (/\?/.test(loader)) {
-                loader = loader.replace(/\?/, '-loader?');
-                extraParamChar = '&';
-            }
-            else {
-                loader = loader + '-loader';
-                extraParamChar = '?';
-            }
-            return loader + (options.sourceMap ? extraParamChar + 'sourceMap' : '');
-        }).join('!');
-
-        if (options.extract) {
-            return ExtractTextPlugin.extract('vue-style-loader', sourceLoader);
-        }
-        else {
-            return ['vue-style-loader', sourceLoader].join('!');
+    const cssLoader = {
+        loader: 'css-loader',
+        options: {
+            minimize: process.env.NODE_ENV === 'production',
+            sourceMap: options.sourceMap
         }
     };
 
-    // http://vuejs.github.io/vue-loader/configurations/extract-css.html
+    const generateLoaders = (loader, loaderOptions) => {
+        const loaders = [cssLoader];
+        if (loader) {
+            loaders.push({
+                loader: loader + '-loader',
+                options: Object.assign({}, loaderOptions, {
+                    sourceMap: options.sourceMap,
+                })
+            })
+        }
+
+        if (options.extract) {
+            return ExtractTextPlugin.extract({
+                use: loaders,
+                fallback: 'style-loader'
+            })
+        }
+        return ['style-loader'].concat(loaders);
+    };
+
     return {
-        css: generateLoaders(['css']),
-        // postcss: generateLoaders(['css']),
-        less: generateLoaders(['css', 'less']),
-        sass: generateLoaders(['css', 'sass?indentedSyntax']),
-        scss: generateLoaders(['css', 'sass']),
-        stylus: generateLoaders(['css', 'postcss', 'stylus']),
-        styl: generateLoaders(['css', 'postcss', 'stylus'])
+        css: generateLoaders(),
+        postcss: generateLoaders('postcss', {
+            postcss: autoprefixer({
+                browsers: ['iOS >= 7', 'Android >= 4.0']
+            })
+        }),
+        less: generateLoaders('less'),
+        sass: generateLoaders('sass', {
+            indentedSyntax: true
+        }),
+        scss: generateLoaders('sass'),
+        stylus: generateLoaders('stylus', {
+            use: [rider()]
+        }),
+        styl: generateLoaders('stylus', {
+            use: [rider()]
+        })
     };
 }
 
-// Generate loaders for standalone style files (outside of .vue)
 export function styleLoaders(options) {
     const output = [];
     const loaders = cssLoaders(options);
+    /* eslint-disable fecs-use-for-of */
     for (const extension in loaders) {
         if (loaders.hasOwnProperty(extension)) {
             const loader = loaders[extension];
             output.push({
                 test: new RegExp('\\.' + extension + '$'),
-                loader: loader
+                use: loader
             });
         }
     }
+    /* eslint-enable fecs-use-for-of */
     return output;
 }
 

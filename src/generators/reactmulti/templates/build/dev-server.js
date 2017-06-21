@@ -1,6 +1,6 @@
 /**
  * @file dev server
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import path from 'path';
@@ -9,15 +9,16 @@ import express from 'express';
 import webpack from 'webpack';
 import bodyParser from 'body-parser';
 import proxyMiddleware from 'http-proxy-middleware';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import handlebars from 'handlebars';
 
 import config from '../config';
 import ajaxMiddleware from './ajax-middleware';
 import {getIP} from './utils';
+import webpackDevConf from './webpack.dev.conf';
 
-const webpackConfig = process.env.NODE_ENV === 'testing'
-    ? require('./webpack.prod.conf')
-    : require('./webpack.dev.conf');
+const webpackConfig = webpackDevConf;
 
 const port = process.env.PORT || config.dev.port;
 const proxyTable = config.dev.proxyTable;
@@ -25,7 +26,7 @@ const proxyTable = config.dev.proxyTable;
 const app = express();
 const compiler = webpack(webpackConfig);
 
-const devMiddleware = require('webpack-dev-middleware')(compiler, {
+const devMiddleware = webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
     stats: {
         colors: true,
@@ -33,7 +34,7 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
     }
 });
 
-const hotMiddleware = require('webpack-hot-middleware')(compiler);
+const hotMiddleware = webpackHotMiddleware(compiler);
 compiler.plugin('compilation', compilation => {
     compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
         hotMiddleware.publish({action: 'reload'});
