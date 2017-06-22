@@ -1,6 +1,6 @@
 /**
  * @file counter reducer
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import {RESULT} from '../actions/ajaxTest';

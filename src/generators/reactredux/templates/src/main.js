@@ -1,6 +1,6 @@
 /**
  * @file 主入口
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import React, {Component} from 'react';
@@ -12,7 +12,8 @@ import Counter from './components/Counter';
 import AjaxTest from './components/AjaxTest';
 import rootReducer from './reducers';
 
-require('./main.styl');
+import img from './css/img/react-logo.png';
+import './main.styl';
 
 class Main extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class Main extends Component {
                 </div>
                 <br/>
                 <i className="icon-mute iconfont"></i>
-                <img src={require('./css/img/react-logo.png')} style={{height: '50px', width: '50px'}}/>
+                <img src={img} style={{height: '50px', width: '50px'}}/>
             </div>
         );
     }

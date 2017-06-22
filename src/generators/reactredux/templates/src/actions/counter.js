@@ -1,6 +1,6 @@
 /**
  * @file counter action
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';

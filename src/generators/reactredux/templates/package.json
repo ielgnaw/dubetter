@@ -4,9 +4,9 @@
   "description": "<%= appName %>",
   "main": "index.js",
   "scripts": {
-    "dev": "babel-node build/dev-server.js",
+    "dev": "NODE_ENV=development babel-node build/dev-server.js",
     "lint": "fecs --reporter=baidu",
-    "build": "rm -rf output && babel-node build/build.js"
+    "build": "rimraf output && NODE_ENV=production babel-node build/build.js"
   },
   "config": {
     "ghooks": {
