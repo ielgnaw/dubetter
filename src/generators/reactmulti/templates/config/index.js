@@ -9,7 +9,7 @@ import devEnv from './dev.env';
 
 export default {
     build: {
-        env: require('./prod.env'),
+        env: prodEnv,
         index: path.resolve(__dirname, '../output/index.html'),
         assetsRoot: path.resolve(__dirname, '../output'),
         // assetsSubDirectory: 'saiya/plan',
@@ -24,7 +24,7 @@ export default {
         productionGzipExtensions: ['js', 'css']
     },
     dev: {
-        env: require('./dev.env'),
+        env: devEnv,
         port: 8003,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',

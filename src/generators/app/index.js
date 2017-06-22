@@ -26,7 +26,8 @@ export default class DubetterGenerator extends Base {
             {
                 type: 'input',
                 name: 'projectName',
-                message: 'Your project name',
+                message: 'Your project name. a new project folder will be created '
+                    + 'when the project name is not the same as the current folder name',
                 default: kebabCase(this.appname)
             },
             {

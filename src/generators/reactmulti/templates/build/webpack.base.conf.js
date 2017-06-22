@@ -5,7 +5,6 @@
 
 import {resolve, join} from 'path';
 import autoprefixer from 'autoprefixer';
-import rider from 'rider';
 
 import config from '../config';
 import {assetsPath} from './utils';

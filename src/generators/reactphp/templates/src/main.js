@@ -1,14 +1,15 @@
 /**
  * @file 入口
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import React from 'react';
 import {render} from 'react-dom';
 
 import AjaxButton from './components/AjaxButton';
+import img from './css/img/react-logo.png';
 
-require('./main.styl');
+import './main.styl';
 
 render(
     <div>
@@ -19,7 +20,7 @@ render(
         </ul>
         <span className="ccc"></span>
         <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" />
-        <img src={require('./css/img/react-logo.png')} style={{height: '50px', width: '50px'}}/>
+        <img src={img} style={{height: '50px', width: '50px'}}/>
         <br/>
         <i className="icon-mute iconfont"></i>
         <br/>

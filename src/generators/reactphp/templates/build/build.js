@@ -1,10 +1,9 @@
 /**
  * @file build
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import 'shelljs/global';
-env.NODE_ENV = 'production';
 
 import path from 'path';
 import ora from 'ora';
@@ -25,7 +24,6 @@ const assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDire
 
 rm('-rf', assetsPath);
 mkdir('-p', assetsPath);
-// cp('-R', 'static/', assetsPath);
 
 webpack(webpackConfig, (err, stats) => {
     spinner.stop()

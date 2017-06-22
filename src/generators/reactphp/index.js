@@ -13,13 +13,13 @@ const DEPENDENCIES = [
 ];
 
 const DEV_DEPENDENCIES = [
-    'autoprefixer', 'babel-cli', 'babel-core', 'babel-loader', 'babel-plugin-add-module-exports',
-    'babel-plugin-transform-runtime', 'babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2',
-    'body-parser', 'cheerio', 'compression-webpack-plugin', 'css-loader', 'eslint-friendly-formatter',
-    'eventsource-polyfill', 'express', 'extract-text-webpack-plugin@v1', 'fecs', 'file-loader', 'handlebars',
-    'html-webpack-plugin', 'http-proxy-middleware', 'json-loader', 'ora', 'postcss-loader', 'rider',
-    'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader', 'vue-style-loader', 'webpack@v1',
-    'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
+    'autoprefixer@7', 'babel-cli@6', 'babel-core@6', 'babel-loader@7', 'babel-plugin-add-module-exports',
+    'babel-plugin-transform-runtime@6', 'babel-preset-es2015@6', 'babel-preset-react@6',
+    'babel-preset-stage-2@6', 'body-parser', 'cheerio', 'compression-webpack-plugin', 'css-loader',
+    'eslint-friendly-formatter', 'eventsource-polyfill', 'express@4', 'extract-text-webpack-plugin@2', 'fecs',
+    'file-loader', 'handlebars@4', 'html-webpack-plugin@2', 'http-proxy-middleware', 'json-loader', 'ora',
+    'postcss', 'rider', 'rimraf', 'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader',
+    'webpack@3', 'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
 ];
 
 export default class ReactGenerator extends Base {

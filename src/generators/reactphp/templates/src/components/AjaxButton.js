@@ -1,6 +1,6 @@
 /**
  * @file AjaxButton 组件
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import React from 'react';
@@ -41,7 +41,7 @@ export default class AjaxButton extends React.Component {
         this.setState({
             num: n
         });
-        const testAjaxUrl = '/saiya/log?isAjax=1';
+        const testAjaxUrl = '/test/log?isAjax=1';
         const args = method === 'get'
             ? {
                 url: testAjaxUrl,
