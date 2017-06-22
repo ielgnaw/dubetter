@@ -1,6 +1,6 @@
 /**
  * @file for hot-reload
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 /* eslint-disable */

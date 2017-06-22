@@ -59,7 +59,7 @@ export function sendGet(ajaxArgs) {
  */
 export function sendPost(ajaxArgs) {
     return (dispatch, getState) => {
-        const testAjaxUrl = '/saiya/log?isAjax=1';
+        const testAjaxUrl = '/test/log?isAjax=1';
         reqwest({
             url: testAjaxUrl,
             method: 'post',

@@ -1,6 +1,6 @@
 /**
  * @file webpack dev config
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import fs from 'fs';
@@ -16,6 +16,7 @@ import RemoveScriptTagPlugin from './remove-script-tag-plugin';
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(name => {
+    // 相对于 webpack.base.conf 的 context 路径
     baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
 });
 
@@ -59,14 +60,9 @@ const webpackPluginList = [
         'process.env': config.dev.env
     }),
 
-    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
-    new webpack.optimize.OccurenceOrderPlugin(),
-
     new webpack.HotModuleReplacementPlugin(),
 
-    new webpack.NoErrorsPlugin(),
-
-    new webpack.optimize.DedupePlugin()
+    new webpack.NoEmitOnErrorsPlugin()
 ];
 
 entryTplList.forEach(item => {
@@ -82,7 +78,7 @@ entryTplList.forEach(item => {
 
 export default merge(baseWebpackConfig, {
     module: {
-        loaders: styleLoaders()
+        rules: styleLoaders()
     },
     devtool: '#eval-source-map',
     plugins: webpackPluginList.concat(new RemoveScriptTagPlugin())

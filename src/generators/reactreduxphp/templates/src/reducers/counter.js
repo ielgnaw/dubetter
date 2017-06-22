@@ -1,6 +1,6 @@
 /**
  * @file counter reducer
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import {INCREMENT_COUNTER, DECREMENT_COUNTER} from '../actions/counter';

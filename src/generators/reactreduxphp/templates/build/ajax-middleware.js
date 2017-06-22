@@ -1,6 +1,6 @@
 /**
  * @file ajax handler for dev
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import path from 'path';
@@ -19,7 +19,7 @@ const requestHandler = (req) => {
     console.log('Ajax Request Path: ', pathName);
 
     delete require.cache[require.resolve(mockFilePath)];
-    var mockDataHandler = require(mockFilePath);
+    const mockDataHandler = require(mockFilePath);
     return mockDataHandler;
 };
 

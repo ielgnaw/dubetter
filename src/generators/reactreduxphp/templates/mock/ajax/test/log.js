@@ -1,3 +1,8 @@
+/**
+ * @file ajax response
+ * @author ielgnaw <wuji0223@gmail.com>
+ */
+
 export function response(getArgs, postArgs) {
     console.log('getArgs', getArgs);
     console.log('postArgs', postArgs);

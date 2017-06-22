@@ -1,6 +1,6 @@
 /**
  * @file php handler for dev
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import path from 'path';

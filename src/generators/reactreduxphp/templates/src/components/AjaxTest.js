@@ -1,6 +1,6 @@
 /**
  * @file AjaxTest 组件
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import React, {Component} from 'react';

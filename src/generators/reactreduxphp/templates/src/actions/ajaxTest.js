@@ -1,6 +1,6 @@
 /**
  * @file ajaxTest action
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import reqwest from 'reqwest';
@@ -27,7 +27,7 @@ export function returnAjaxRet(statusCode, method, ret) {
  */
 export function sendGet(ajaxArgs) {
     return (dispatch, getState) => {
-        const testAjaxUrl = '/saiya/log?isAjax=1';
+        const testAjaxUrl = '/test/log?isAjax=1';
         reqwest({
             url: testAjaxUrl,
             type: 'json',
@@ -59,7 +59,7 @@ export function sendGet(ajaxArgs) {
  */
 export function sendPost(ajaxArgs) {
     return (dispatch, getState) => {
-        const testAjaxUrl = '/saiya/log?isAjax=1';
+        const testAjaxUrl = '/test/log?isAjax=1';
         reqwest({
             url: testAjaxUrl,
             method: 'post',

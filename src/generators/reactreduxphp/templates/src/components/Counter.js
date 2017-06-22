@@ -1,13 +1,13 @@
 /**
  * @file Counter 组件
- * @author ielgnaw(wuji0223@gmail.com)
+ * @author ielgnaw <wuji0223@gmail.com>
  */
 
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {increment, decrement, incrementIfOdd, incrementAsync} from '../actions/counter';
 
-require('./Counter.styl');
+import './Counter.styl';
 
 class Counter extends Component {
     render() {
