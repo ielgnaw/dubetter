@@ -27,14 +27,14 @@ export default class ReactPureMultiGenerator extends Base {
         super(...args);
 
         this.path = this.options.isCreateProjectDir
-            ? this.options.appName
+            ? this.options.projectName
             : '.'
 
-        if (DEPENDENCIES.indexOf(this.options.appName) !== -1) {
+        if (DEPENDENCIES.indexOf(this.options.projectName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as dependencies names'));
         }
 
-        if (DEV_DEPENDENCIES.indexOf(this.options.appName) !== -1) {
+        if (DEV_DEPENDENCIES.indexOf(this.options.projectName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as devDependencies names'));
         }
 
@@ -90,7 +90,7 @@ export default class ReactPureMultiGenerator extends Base {
             this.templatePath('package.json'),
             this.destinationPath(this.path, 'package.json'),
             {
-                appName: this.options.appName
+                projectName: this.options.projectName
             }
         );
 
@@ -98,7 +98,7 @@ export default class ReactPureMultiGenerator extends Base {
             this.templatePath('README.md'),
             this.destinationPath(this.path, 'README.md'),
             {
-                appName: this.options.appName
+                projectName: this.options.projectName
             }
         );
     }
@@ -107,16 +107,26 @@ export default class ReactPureMultiGenerator extends Base {
      * 安装依赖
      */
     install() {
-        process.chdir(`${this.path}/`);
-        this.npmInstall(DEPENDENCIES, {save: true});
-        this.npmInstall(DEV_DEPENDENCIES, {saveDev: true});
+        if (this.options.isInstall) {
+            process.chdir(`${this.path}/`);
+            this.npmInstall(DEPENDENCIES, {save: true});
+            this.npmInstall(DEV_DEPENDENCIES, {saveDev: true});
+        }
     }
 
     /**
      * 安装结束、清除文件、设置 good bye 文案、等
      */
     end() {
-        this.log(chalk.cyan('\nProject create success'));
-        this.log(chalk.cyan(`\nFor more information, please see ${this.path}${path.sep}README.md\n`));
+        const msg = `\nFor more information, please see ${this.path}${path.sep}README.md\n`;
+        if (this.options.isInstall) {
+            this.log(chalk.cyan('\nProject create success and all deps install done'));
+            this.log(chalk.cyan(msg));
+        }
+        else {
+            this.log(chalk.cyan('\nProject create success'));
+            this.log(chalk.cyan(`\ncd ${this.path} && npm i`));
+            this.log(chalk.cyan(msg));
+        }
     }
 }

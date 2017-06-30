@@ -14,6 +14,19 @@ Usage
     
     $ yo dubetter
     $ yo dubetter -h
+
+
+Test
+---
+
+    npm test
+
+
+Coverage
+---
+    
+    npm run coverage
+   
    
 Example
 ---

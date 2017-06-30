@@ -26,7 +26,9 @@ export default class ReactGenerator extends Base {
     constructor(...args) {
         super(...args);
 
-        this.appName = this.options.appName;
+        this.appName = this.options.isCreateProjectDir
+            ? this.options.projectName
+            : '.';
 
         if (DEPENDENCIES.indexOf(this.appName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as dependencies names'));
@@ -103,16 +105,26 @@ export default class ReactGenerator extends Base {
      * 安装依赖
      */
     install() {
-        process.chdir(`${this.appName}/`);
-        this.npmInstall(DEPENDENCIES, {save: true});
-        this.npmInstall(DEV_DEPENDENCIES, {saveDev: true});
+        if (this.options.isInstall) {
+            process.chdir(`${this.appName}/`);
+            this.npmInstall(DEPENDENCIES, {save: true});
+            this.npmInstall(DEV_DEPENDENCIES, {saveDev: true});
+        }
     }
 
     /**
      * 安装结束、清除文件、设置good bye文案、等
      */
     end() {
-        this.log(chalk.cyan('\nProject create success'));
-        this.log(chalk.cyan(`\nFor more information, please see ${this.appName}${path.sep}README.md\n`));
+        const msg = `\nFor more information, please see ${this.appName}${path.sep}README.md\n`;
+        if (this.options.isInstall) {
+            this.log(chalk.cyan('\nProject create success and all deps install done'));
+            this.log(chalk.cyan(msg));
+        }
+        else {
+            this.log(chalk.cyan('\nProject create success'));
+            this.log(chalk.cyan(`\ncd ${this.appName} && npm i`));
+            this.log(chalk.cyan(msg));
+        }
     }
 }

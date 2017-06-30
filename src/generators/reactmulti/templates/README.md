@@ -1,4 +1,4 @@
-<%= appName %>
+<%= projectName %>
 ===
 
 ## Build Setup

@@ -1,7 +1,7 @@
 {
-  "name": "<%= appName %>",
+  "name": "<%= projectName %>",
   "version": "0.0.1",
-  "description": "<%= appName %>",
+  "description": "<%= projectName %>",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development babel-node build/dev-server.js",

@@ -60,10 +60,17 @@ export default class DubetterGenerator extends Base {
                         value: 'reactreduxphp'
                     }
                 ]
+            },
+            {
+                type: 'confirm',
+                name: 'isInstall',
+                message: 'Install dependencies?',
+                default: false
             }]
         ).then(answers => {
             this.projectType = answers.projectType;
             this.projectName = answers.projectName;
+            this.isInstall = answers.isInstall;
         });
     }
 
@@ -74,8 +81,9 @@ export default class DubetterGenerator extends Base {
             this.composeWith(ns,
                 {
                     options: {
-                        appName: this.projectName,
-                        isCreateProjectDir: basename(process.cwd()) !== this.projectName
+                        projectName: this.projectName,
+                        isCreateProjectDir: basename(process.cwd()) !== this.projectName,
+                        isInstall: this.isInstall
                     }
                 },
                 {
