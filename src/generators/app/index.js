@@ -10,10 +10,11 @@ import {basename} from 'path';
 
 const GENERATOR_MAP = {
     nodejs: '../nodejs',
-    reactreduxphp: '../reactreduxphp',
-    reactredux: '../reactredux',
+    react: '../react',
     reactphp: '../reactphp',
     reactmulti: '../reactmulti',
+    reactredux: '../reactredux',
+    reactreduxphp: '../reactreduxphp',
 };
 
 export default class DubetterGenerator extends Base {
@@ -40,20 +41,24 @@ export default class DubetterGenerator extends Base {
                         value: 'nodejs'
                     },
                     {
-                        name: 'React & Redux project, use Smarty rendering template',
-                        value: 'reactreduxphp'
+                        name: 'React project, Pure FE Project',
+                        value: 'react'
                     },
                     {
-                        name: 'React & Redux project, Pure FE Project',
-                        value: 'reactredux'
+                        name: 'React project, use Smarty rendering template',
+                        value: 'reactphp'
                     },
                     {
                         name: 'React project, Multiple page, Pure FE Project',
                         value: 'reactmulti'
                     },
                     {
-                        name: 'React project, use Smarty rendering template',
-                        value: 'reactphp'
+                        name: 'React & Redux project, Pure FE Project',
+                        value: 'reactredux'
+                    },
+                    {
+                        name: 'React & Redux project, use Smarty rendering template',
+                        value: 'reactreduxphp'
                     }
                 ]
             }]
