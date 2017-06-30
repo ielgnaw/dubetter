@@ -19,7 +19,8 @@ Example
 ---
 
 - [Node.js](https://github.com/ielgnaw/boilerplate/tree/master/nodejs)
+- [Pure React](https://github.com/ielgnaw/boilerplate/tree/master/pure-react)
+- [React&Smarty](https://github.com/ielgnaw/boilerplate/tree/master/react-php)
+- [React Multipage](https://github.com/ielgnaw/boilerplate/tree/master/pure-react-multipage)
 - [React&Redux](https://github.com/ielgnaw/boilerplate/tree/master/pure-react-redux)
 - [React&Redux&Smarty](https://github.com/ielgnaw/boilerplate/tree/master/react-redux-php)
-- [React](https://github.com/ielgnaw/boilerplate/tree/master/react-php)
-- [React Multipage](https://github.com/ielgnaw/boilerplate/tree/master/pure-react-multipage)

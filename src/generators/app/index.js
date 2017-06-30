@@ -4,7 +4,6 @@
  */
 
 import kebabCase from 'lodash.kebabcase';
-import chalk from 'chalk';
 import {Base} from 'yeoman-generator';
 import {basename} from 'path';
 
