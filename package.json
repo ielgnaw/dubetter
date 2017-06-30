@@ -43,6 +43,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-stage-2": "^6.17.0",
+    "coveralls": "^2.13.1",
     "mocha": "^3.4.2",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
