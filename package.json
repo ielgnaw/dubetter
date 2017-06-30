@@ -1,6 +1,6 @@
 {
   "name": "generator-dubetter",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Scaffolding for Web and Node.js projects",
   "files": [
     "lib/generators"

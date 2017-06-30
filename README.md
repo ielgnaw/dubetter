@@ -1,6 +1,10 @@
 # dubetter
 Scaffolding for Web and Node.js projects
 
+[![Build Status](https://img.shields.io/travis/ielgnaw/dubetter.svg?style=flat)](http://travis-ci.org/ielgnaw/dubetter)
+[![NPM version](https://img.shields.io/npm/v/generator-dubetter.svg?style=flat)](https://www.npmjs.com/package/generator-dubetter)
+[![Dependencies](https://img.shields.io/david/ielgnaw/dubetter.svg?style=flat)](https://david-dm.org/ielgnaw/dubetter)
+[![DevDependencies](https://img.shields.io/david/dev/ielgnaw/dubetter.svg?style=flat)](https://david-dm.org/ielgnaw/dubetter)
 
 Install
 ------
@@ -11,7 +15,7 @@ Install
 
 Usage
 ---
-    
+
     $ yo dubetter
     $ yo dubetter -h
 
@@ -24,10 +28,10 @@ Test
 
 Coverage
 ---
-    
+
     npm run coverage
-   
-   
+
+
 Example
 ---
 
