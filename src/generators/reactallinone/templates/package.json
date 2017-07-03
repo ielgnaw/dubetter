@@ -1,0 +1,22 @@
+{
+  "name": "<%= appName %>",
+  "version": "0.0.1",
+  "description": "<%= appName %>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development babel-node build/dev-server.js",
+    "lint": "fecs --reporter=baidu",
+    "build": "rimraf output && NODE_ENV=production babel-node build/build.js"
+  },
+  "config": {
+    "ghooks": {
+      "pre-push": "fecs --reporter=baidu"
+    }
+  },
+  "author": "ielgnaw",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

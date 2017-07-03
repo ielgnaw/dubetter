@@ -324,3 +324,56 @@ describe('React&Redux&Smarty Project', () => {
             });
     });
 });
+
+describe('React&Redux&React Router Project', () => {
+    it('should add files', () => {
+        return helpers.run(path.join(__dirname, '../src/generators/reactallinone'))
+            .withOptions({
+                isCreateProjectDir: false,
+                projectName: 'reactallinone-project',
+                isInstall: false
+            })
+            .then(() => {
+                assert.file([
+                    'package.json',
+                    '.babelrc',
+                    '.editorconfig',
+                    '.eslintrc',
+                    '.fecsrc',
+                    '.gitignore',
+                    '.jshintrc',
+                    'index.html',
+                    'README.md',
+                    'src',
+                    'build',
+                    'mock',
+                    'config'
+                ]);
+            });
+    });
+    it('should not add files', () => {
+        return helpers.run(path.join(__dirname, '../src/generators/reactallinone'))
+            .withOptions({
+                isCreateProjectDir: true, // 为 true 说明要新增目录，所以断言应该判断不存在
+                projectName: 'reactallinone-project1',
+                isInstall: false
+            })
+            .then(() => {
+                assert.noFile([
+                    'package.json',
+                    '.babelrc',
+                    '.editorconfig',
+                    '.eslintrc',
+                    '.fecsrc',
+                    '.gitignore',
+                    '.jshintrc',
+                    'index.html',
+                    'README.md',
+                    'src',
+                    'build',
+                    'mock',
+                    'config'
+                ]);
+            });
+    });
+});

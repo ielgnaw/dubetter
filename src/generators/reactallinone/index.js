@@ -1,5 +1,5 @@
 /**
- * @file ReactReduxGenerator entry
+ * @file ReactAllInOne entry
  * @author ielgnaw(wuji0223@gmail.com)
  */
 
@@ -9,7 +9,8 @@ import mkdirp from 'mkdirp';
 import {Base} from 'yeoman-generator';
 
 const DEPENDENCIES = [
-    'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'reqwest'
+    'react', 'react-dom', 'connect-history-api-fallback', 'react-redux',
+    'react-router@3', 'react-router-redux', 'redux', 'redux-thunk', 'reqwest'
 ];
 
 const DEV_DEPENDENCIES = [
@@ -21,7 +22,6 @@ const DEV_DEPENDENCIES = [
     'postcss', 'rider', 'rimraf', 'shelljs', 'style-loader', 'stylus', 'stylus-loader', 'url-loader',
     'webpack@3', 'webpack-dev-middleware', 'webpack-hot-middleware', 'webpack-merge'
 ];
-
 
 export default class NodejsGenerator extends Base {
     constructor(...args) {
@@ -46,7 +46,7 @@ export default class NodejsGenerator extends Base {
      * 复制目录
      */
     copyDirectory() {
-        ['build', 'config', 'entry', 'mock', 'src'].forEach(item => {
+        ['build', 'config', 'mock', 'src'].forEach(item => {
             this.fs.copy(this.templatePath(item), this.destinationPath(this.appName, item));
         });
     }
@@ -99,6 +99,11 @@ export default class NodejsGenerator extends Base {
             {
                 appName: this.appName
             }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath('index.html'),
+            this.destinationPath(this.appName, 'index.html')
         );
     }
 

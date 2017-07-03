@@ -79,7 +79,7 @@ export default class NodejsGenerator extends Base {
         );
 
         this.fs.copyTpl(
-            this.templatePath('package.json'),
+            this.templatePath(this.options.isInstall ? 'package.json' : 'package_with_dep.json'),
             this.destinationPath(this.path, 'package.json'),
             {
                 projectName: this.options.projectName

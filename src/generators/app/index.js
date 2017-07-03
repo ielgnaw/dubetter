@@ -14,6 +14,7 @@ const GENERATOR_MAP = {
     reactmulti: '../reactmulti',
     reactredux: '../reactredux',
     reactreduxphp: '../reactreduxphp',
+    reactallinone: '../reactallinone'
 };
 
 export default class DubetterGenerator extends Base {
@@ -36,28 +37,32 @@ export default class DubetterGenerator extends Base {
                 message: 'Project Type',
                 choices: [
                     {
-                        name: 'Npm Module Project',
+                        name: 'Npm Module Project (nodejs)',
                         value: 'nodejs'
                     },
                     {
-                        name: 'React project, Pure FE Project',
+                        name: 'React project, Pure FE Project (reactproject)',
                         value: 'react'
                     },
                     {
-                        name: 'React project, use Smarty rendering template',
+                        name: 'React project, use Smarty rendering template (reactphp)',
                         value: 'reactphp'
                     },
                     {
-                        name: 'React project, Multiple page, Pure FE Project',
+                        name: 'React project, Multiple page, Pure FE Project (reactmulti)',
                         value: 'reactmulti'
                     },
                     {
-                        name: 'React & Redux project, Pure FE Project',
+                        name: 'React & Redux project, Pure FE Project (reactredux)',
                         value: 'reactredux'
                     },
                     {
-                        name: 'React & Redux project, use Smarty rendering template',
+                        name: 'React & Redux project, use Smarty rendering template (reactreduxphp)',
                         value: 'reactreduxphp'
+                    },
+                    {
+                        name: 'React & Redux & React Router project, Pure FE Project (reactallinone)',
+                        value: 'reactallinone'
                     }
                 ]
             },
