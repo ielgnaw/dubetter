@@ -6,7 +6,7 @@
 import path from 'path';
 import chalk from 'chalk';
 import mkdirp from 'mkdirp';
-import {Base} from 'yeoman-generator';
+import Base from 'yeoman-generator';
 
 const DEPENDENCIES = [
     'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'reqwest'

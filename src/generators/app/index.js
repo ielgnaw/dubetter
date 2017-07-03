@@ -4,7 +4,7 @@
  */
 
 import kebabCase from 'lodash.kebabcase';
-import {Base} from 'yeoman-generator';
+import Base from 'yeoman-generator';
 import {basename} from 'path';
 
 const GENERATOR_MAP = {

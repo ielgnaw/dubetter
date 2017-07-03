@@ -6,7 +6,7 @@
 import path from 'path';
 import chalk from 'chalk';
 import mkdirp from 'mkdirp';
-import {Base} from 'yeoman-generator';
+import Base from 'yeoman-generator';
 
 const DEV_DEPENDENCIES = [
     'babel-cli', 'babel-core', 'babel-preset-es2015', 'babel-preset-stage-2',
