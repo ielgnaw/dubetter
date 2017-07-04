@@ -32,6 +32,10 @@ describe('Nodejs Project', () => {
                     'src',
                     'test'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "nodejs-project"'
+                );
             });
     });
     it('should not add files', () => {
@@ -58,6 +62,7 @@ describe('Nodejs Project', () => {
                 ]);
             });
     });
+
 });
 
 describe('React Project', () => {
@@ -84,6 +89,10 @@ describe('React Project', () => {
                     'mock',
                     'config'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "react-project"'
+                );
             });
     });
     it('should not add files', () => {
@@ -137,6 +146,10 @@ describe('React&Smarty Project', () => {
                     'config',
                     'entry'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "reactphp-project"'
+                );
             });
     });
     it('should not add files', () => {
@@ -190,6 +203,10 @@ describe('React Multipage Project', () => {
                     'config',
                     'entry'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "reactmulti-project"'
+                );
             });
     });
     it('should not add files', () => {
@@ -243,6 +260,10 @@ describe('React&Redux Project', () => {
                     'mock',
                     'config'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "reactredux-project"'
+                );
             });
     });
     it('should not add files', () => {
@@ -296,6 +317,10 @@ describe('React&Redux&Smarty Project', () => {
                     'config',
                     'entry'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "reactreduxphp-project"'
+                );
             });
     });
     it('should not add files', () => {
@@ -349,6 +374,10 @@ describe('React&Redux&React Router Project', () => {
                     'mock',
                     'config'
                 ]);
+                assert.fileContent(
+                    'package.json',
+                    '"name": "reactallinone-project"'
+                );
             });
     });
     it('should not add files', () => {

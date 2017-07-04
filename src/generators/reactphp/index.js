@@ -30,6 +30,10 @@ export default class ReactGenerator extends Base {
             ? this.options.projectName
             : '.';
 
+        this.packageName = !this.options.projectName
+            ? path.basename(process.cwd())
+            : this.options.projectName;
+
         if (DEPENDENCIES.indexOf(this.appName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as dependencies names'));
         }
@@ -88,7 +92,7 @@ export default class ReactGenerator extends Base {
             this.templatePath(this.options.isInstall ? 'package.json' : 'package_with_dep.json'),
             this.destinationPath(this.appName, 'package.json'),
             {
-                appName: this.appName
+                appName: this.packageName
             }
         );
 
@@ -96,7 +100,7 @@ export default class ReactGenerator extends Base {
             this.templatePath('README.md'),
             this.destinationPath(this.appName, 'README.md'),
             {
-                appName: this.appName
+                appName: this.packageName
             }
         );
     }

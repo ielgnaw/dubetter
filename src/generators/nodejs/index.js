@@ -21,6 +21,10 @@ export default class NodejsGenerator extends Base {
             ? this.options.projectName
             : '.';
 
+        this.packageName = !this.options.projectName
+            ? path.basename(process.cwd())
+            : this.options.projectName;
+
         if (DEV_DEPENDENCIES.indexOf(this.options.projectName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as devDependencies names'));
         }
@@ -82,7 +86,7 @@ export default class NodejsGenerator extends Base {
             this.templatePath(this.options.isInstall ? 'package.json' : 'package_with_dep.json'),
             this.destinationPath(this.path, 'package.json'),
             {
-                projectName: this.options.projectName
+                projectName: this.packageName
             }
         );
 
@@ -90,7 +94,7 @@ export default class NodejsGenerator extends Base {
             this.templatePath('README.md'),
             this.destinationPath(this.path, 'README.md'),
             {
-                projectName: this.options.projectName
+                projectName: this.packageName
             }
         );
 

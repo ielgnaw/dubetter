@@ -28,7 +28,11 @@ export default class ReactPureMultiGenerator extends Base {
 
         this.path = this.options.isCreateProjectDir
             ? this.options.projectName
-            : '.'
+            : '.';
+
+        this.packageName = !this.options.projectName
+            ? path.basename(process.cwd())
+            : this.options.projectName;
 
         if (DEPENDENCIES.indexOf(this.options.projectName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as dependencies names'));
@@ -90,7 +94,7 @@ export default class ReactPureMultiGenerator extends Base {
             this.templatePath(this.options.isInstall ? 'package.json' : 'package_with_dep.json'),
             this.destinationPath(this.path, 'package.json'),
             {
-                projectName: this.options.projectName
+                projectName: this.packageName
             }
         );
 
@@ -98,7 +102,7 @@ export default class ReactPureMultiGenerator extends Base {
             this.templatePath('README.md'),
             this.destinationPath(this.path, 'README.md'),
             {
-                projectName: this.options.projectName
+                projectName: this.packageName
             }
         );
     }
