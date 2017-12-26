@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "fecs src test/**/*.spec.js --type=js",
     "compile": "rm -rf lib && ./node_modules/.bin/babel src -d lib --source-maps inline --copy-files",
-    "test": "npm run compile && ./node_modules/.bin/_mocha --compilers js:babel-core/register --recursive",
+    "test": "npm run compile && ./node_modules/.bin/_mocha --require babel-core/register --recursive",
     "coverage": "npm run compile && ./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover _mocha 'test/**/*.spec.@(js|es|es6)'",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "sourcemap": "./node_modules/.bin/babel src -d lib -s",

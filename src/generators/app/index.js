@@ -85,11 +85,9 @@ export default class DubetterGenerator extends Base {
         if (ns) {
             this.composeWith(ns,
                 {
-                    options: {
-                        projectName: this.projectName,
-                        isCreateProjectDir: basename(process.cwd()) !== this.projectName,
-                        isInstall: this.isInstall
-                    }
+                    projectName: this.projectName,
+                    isCreateProjectDir: basename(process.cwd()) !== this.projectName,
+                    isInstall: this.isInstall
                 },
                 {
                     local: require.resolve(local)

@@ -9,8 +9,9 @@ import mkdirp from 'mkdirp';
 import Base from 'yeoman-generator';
 
 const DEV_DEPENDENCIES = [
-    'babel-cli', 'babel-core', 'babel-preset-es2015', 'babel-preset-stage-2',
-    'babel-istanbul', 'babel-plugin-add-module-exports', 'fecs', 'chai', 'mocha'
+    'babel-cli', 'babel-core', 'babel-istanbul',
+    'babel-plugin-add-module-exports', 'babel-preset-env', 'babel-preset-stage-2',
+    'coveralls', 'mocha', 'chai', 'fecs'
 ];
 
 export default class NodejsGenerator extends Base {
@@ -28,7 +29,6 @@ export default class NodejsGenerator extends Base {
         if (DEV_DEPENDENCIES.indexOf(this.options.projectName) !== -1) {
             this.env.error(chalk.magenta('Project name can\'t be the same as devDependencies names'));
         }
-
         if (this.options.isCreateProjectDir) {
             mkdirp.sync(this.path);
         }
