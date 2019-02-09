@@ -1,6 +1,6 @@
 {
   "name": "generator-dubetter",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Scaffolding for Web and Node.js projects",
   "files": [
     "lib/generators"
@@ -25,30 +25,30 @@
     "url": "git+https://github.com/ielgnaw/dubetter.git"
   },
   "author": "ielgnaw",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ielgnaw/dubetter/issues"
   },
   "homepage": "https://github.com/ielgnaw/dubetter#readme",
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.4.2",
     "lodash.kebabcase": "^4.1.1",
     "mkdirp": "^0.5.1",
-    "yeoman-generator": "^2.0.1"
+    "yeoman-generator": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-istanbul": "^0.12.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "check-node-version": "^3.1.1",
-    "coveralls": "^3.0.0",
-    "mocha": "^4.0.1",
-    "yeoman-assert": "^3.1.0",
-    "yeoman-test": "^1.7.0"
+    "check-node-version": "^3.2.0",
+    "coveralls": "^3.0.2",
+    "mocha": "^5.2.0",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^1.9.1"
   },
   "engines": {
     "node": ">=5.12.0"
