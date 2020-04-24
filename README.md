@@ -14,7 +14,7 @@ Install
     $ npm install -g generator-dubetter
 
 
-Usage
+Usages
 ---
 
     $ yo dubetter
